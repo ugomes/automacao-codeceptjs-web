@@ -7,7 +7,7 @@ Scenario('Criar Cadastro',  ({I, cadastrar_novo_usuario_page}) => {
     var name = faker.name.firstName()
     var email = faker.internet.email()
     
-    I.amOnPage('/')
+    
     //I.click('Cadastro')
    // I.fillField('#user',name)
    // I.fillField('#email',email)

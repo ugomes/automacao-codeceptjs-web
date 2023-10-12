@@ -2,16 +2,16 @@ const {
   setHeadlessWhen,
   setCommonPlugins
 } = require('@codeceptjs/configure');
-// turn on headless mode when running with HEADLESS=true environment variable
+
+// ativa o modo sem cabeça quando executado com a variável de ambiente HEADLESS=true
 // export HEADLESS=true && npx codeceptjs run
 setHeadlessWhen(process.env.HEADLESS);
 
-// enable all common plugins https://github.com/codeceptjs/configure#setcommonplugins
+// habilita todos os plugins comuns https://github.com/codeceptjs/configure#setcommonplugins
 setCommonPlugins();
 
 /** @type {CodeceptJS.MainConfig} */
 exports.config = {
-
   name: 'automacao-codeceptjs-web',
   tests: './steps/*_test.js',
   output: './output',
@@ -23,12 +23,31 @@ exports.config = {
       windowSize: '1920x1080'
     }
   },
+  plugins: {
+
+    allure: {
+      enabled: true,
+      require: '@codeceptjs/allure-legacy'
+      
+    },
+    stepByStepReport: {
+      enabled: true,
+      deleteSuccessful:false,
+      screenshotsForAllureReport:true
+    },
+    mocha: {
+      reporterOptions: {
+        }
+    },
+  
+
+
+  },
   include: {
     I: './steps_file.js',
-
     login_page: "./pages/login_page.js",
-    cadastrar_novo_usuario_page: "./pages/cadastrar_novo_usuario_page.js",
-  },
-
-  
+    cadastrar_novo_usuario_page: "./pages/cadastrar_novo_usuario_page.js"
+  }
 }
+
+
